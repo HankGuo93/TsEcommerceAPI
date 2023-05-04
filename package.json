@@ -4,8 +4,8 @@
   "description": "Web API for Ecommerce service",
   "main": "index.js",
  "scripts": {
-    "dev": "nodemon source/server.ts",
-    "build": "rm -rf build/ && prettier --write source/ && tsc"
+    "start": "nodemon",
+    "build": "rm -rf build/ && prettier --write src/ && tsc"
   },
   "keywords": [],
   "author": "",
