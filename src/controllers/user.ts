@@ -33,14 +33,14 @@ export const deleteUserById = async (req: express.Request, res: express.Response
 export const updateUserById = async (req: express.Request, res: express.Response) => {
     try {
         const { id } = req.params;
-        const { username } = req.body;
+        const { name } = req.body;
 
-        if (!username) {
+        if (!name) {
             return res.sendStatus(400);
         }
 
         const user = await updateUserByIdFromDb(id, {
-            username: username,
+            name: name,
             updatedAt: Math.floor(new Date().getTime() / 1000)
         });
         return res.status(200).json(user);
