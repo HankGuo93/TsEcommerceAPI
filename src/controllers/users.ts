@@ -2,7 +2,6 @@ import express from 'express';
 
 import {
     getUserByEmail as getUserByEmailFromDb,
-    getUserById as getUserByIdFromDb,
     deleteUserById as deleteUserByIdFromDb,
     updateUserById as updateUserByIdFromDb,
 } from '../db/users';
