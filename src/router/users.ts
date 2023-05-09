@@ -1,8 +1,10 @@
 import express from 'express';
 
-import { getUserByEmail } from '../controllers/users';
-import { isAuthenticated } from '../middlewares';
+import { getUserByEmail, deleteUserById, updateUserById } from '../controllers/users';
+import { isAuthenticated, isOwner } from '../middlewares';
 
 export default (router: express.Router) => {
     router.get('/user', isAuthenticated, getUserByEmail);
+    router.delete('/user/:id', isAuthenticated, isOwner, deleteUserById);
+    router.put('/user/:id', isAuthenticated, isOwner, updateUserById);
 };
