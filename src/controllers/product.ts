@@ -54,6 +54,9 @@ export const createProduct = async (req: express.Request, res: express.Response)
 export const updateProductById = async (req: express.Request, res: express.Response) => {
     try {
         const { id } = req.params;
+        if (id === null) {
+            return res.sendStatus(400);
+        }
         const { name, description, price, category } = req.body;
         const product = await updateProductByIdFromDb(id, {
             name,
