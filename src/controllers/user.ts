@@ -4,7 +4,7 @@ import {
     getUserByEmail as getUserByEmailFromDb,
     deleteUserById as deleteUserByIdFromDb,
     updateUserById as updateUserByIdFromDb,
-} from '../db/users';
+} from '../db/user';
 
 export const getUserByEmail = async (req: express.Request, res: express.Response) => {
     try {
@@ -41,7 +41,7 @@ export const updateUserById = async (req: express.Request, res: express.Response
 
         const user = await updateUserByIdFromDb(id, {
             username: username,
-            updateAt: Math.floor(new Date().getTime() / 1000)
+            updatedAt: Math.floor(new Date().getTime() / 1000)
         });
         return res.status(200).json(user);
     } catch (error) {
