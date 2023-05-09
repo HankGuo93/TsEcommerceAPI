@@ -3,11 +3,11 @@ import mongoose from "mongoose";
 const ProductSchema = new mongoose.Schema({
     name: { type: String, require: true },
     description: { type: String, require: false },
-    price: { type: Float32Array, require: true },
-    stock: { type: Int32Array, require: false },
+    price: { type: Number, require: true },
+    stock: { type: Number, require: false },
     category: { type: String, require: true },
-    createdAt: { type: Int32Array, require: true },
-    updateAt: { type: Int32Array, require: false },
+    createdAt: { type: Number, require: true },
+    updatedAt: { type: Number, require: false },
 });
 
 export const ProductModel = mongoose.model('Product', ProductSchema);
