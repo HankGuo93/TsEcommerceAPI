@@ -18,4 +18,7 @@ export const getProductsByCategory = (category: string) => ProductModel.find({ c
 export const createProduct = (values: Record<string, any>) => new ProductModel(values)
     .save().then((product) => product.toObject());
 export const deleteProductById = (id: string) => ProductModel.findOneAndDelete({ _id: id });
-export const updateProductById = (id: string, values: Record<string, any>) => ProductModel.findByIdAndUpdate(id, values);
+export const updateProductById = async (id: string, values: Record<string, any>) => {
+    await ProductModel.findByIdAndUpdate(id, values);
+    return ProductModel.findById(id);
+};
