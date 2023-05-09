@@ -58,7 +58,8 @@ export const register = async (req: express.Request, res: express.Response) => {
             authentication: {
                 salt,
                 password: authentication(salt, password)
-            }
+            },
+            createAt: Math.floor(new Date().getTime() / 1000)
         });
 
         return res.status(200).json(user).end();
