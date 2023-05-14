@@ -1,7 +1,7 @@
 import express from "express";
 
 import authentication from './authentication';
-import users from './users';
+import users from './user';
 import product from "./product";
 
 const router = express.Router();
