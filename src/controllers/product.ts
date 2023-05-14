@@ -4,7 +4,7 @@ import {
     getProductById as getProductByIdFromDb,
     getProducts as getProductsFromDb,
     getProductsByCategory as getProductsByCategoryFromDb,
-    createProduct as createProdcutFromDb,
+    createProduct as createProductFromDb,
     updateProductById as updateProductByIdFromDb,
     deleteProductById as deleteProductByIdFromDb,
 } from '../db/product';
@@ -55,7 +55,7 @@ export const getProductsByCategory = async (req: express.Request, res: express.R
 export const createProduct = async (req: express.Request, res: express.Response) => {
     try {
         const { name, description, price, stock, category } = req.body;
-        const product = await createProdcutFromDb({
+        const product = await createProductFromDb({
             name,
             description,
             price,
