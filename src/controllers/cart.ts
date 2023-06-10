@@ -7,6 +7,33 @@ import {
     removeItemFromCart as removeItemFromCartFromDb,
 } from '../db/cart';
 
+/**
+ * @swagger
+ * tags:
+ *   name: Cart
+ *   description: Shopping cart endpoints
+ */
+
+/**
+ * @swagger
+ * /cart:
+ *   get:
+ *     summary: Get cart by user ID
+ *     tags: [Cart]
+ *     parameters:
+ *       - in: query
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Successful retrieval of the cart
+ *       400:
+ *         description: Invalid user ID
+ *       404:
+ *         description: Cart not found
+ */
 export const getCartByUserId = async (req: express.Request, res: express.Response) => {
     try {
         var userId  = req.query.userId;
@@ -24,6 +51,27 @@ export const getCartByUserId = async (req: express.Request, res: express.Respons
     }
 }
 
+/**
+ * @swagger
+ * /cart:
+ *   post:
+ *     summary: Create a new cart
+ *     tags: [Cart]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               userId:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Successful creation of the cart
+ *       400:
+ *         description: Invalid request body
+ */
 export const createCart = async (req: express.Request, res: express.Response) => {
     try {
         const { userId } = req.body;
@@ -38,6 +86,34 @@ export const createCart = async (req: express.Request, res: express.Response) =>
     }
 }
 
+/**
+ * @swagger
+ * /cart/add-item:
+ *   post:
+ *     summary: Add an item to the cart
+ *     tags: [Cart]
+ *     parameters:
+ *       - in: query
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               // Specify the properties of the item object
+ *     responses:
+ *       200:
+ *         description: Successful addition of the item to the cart
+ *       400:
+ *         description: Invalid request body or user ID
+ *       404:
+ *         description: Cart not found
+ */
 export const addItemToCart = async (req: express.Request, res: express.Response) => {
     try {
         var userId = req.query.userId;
@@ -57,6 +133,31 @@ export const addItemToCart = async (req: express.Request, res: express.Response)
     }
 }
 
+/**
+ * @swagger
+ * /cart/remove-item:
+ *   delete:
+ *     summary: Remove an item from the cart
+ *     tags: [Cart]
+ *     parameters:
+ *       - in: query
+ *         name: userId
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: query
+ *         name: itemId
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: Successful removal of the item from the cart
+ *       400:
+ *         description: Invalid user ID or item ID
+ *       404:
+ *         description: Cart not found or item not found
+ */
 export const removeItemFromCart = async (req: express.Request, res: express.Response) => {
     try {
         const userId = req.query.userId;

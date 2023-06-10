@@ -1,6 +1,8 @@
 import express from 'express';
 import http from 'http';
 import bodyParser from 'body-parser';
+import swaggerJsdoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
@@ -12,6 +14,19 @@ const app = express();
 app.use(cors({
     credentials: true
 }))
+
+const swaggerOptions = {
+    definition: {
+      openapi: '3.0.0',
+      info: {
+        title: 'TsEcommerceAPI',
+        version: '1.0.0',
+      },
+    },
+    apis: ['./src/controllers/*.ts'],
+  };
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.use(compression());
 app.use(cookieParser());

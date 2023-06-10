@@ -3,6 +3,38 @@ import express from 'express';
 import { createUser, getUserByEmail } from '../db/user';
 import { authentication, random } from '../helpers';
 
+/**
+ * @swagger
+ * tags:
+ *   name: Authentication
+ *   description: User authentication endpoints
+ */
+
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     summary: User login
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Successful login
+ *       400:
+ *         description: Invalid request body
+ *       403:
+ *         description: Invalid email or password
+ */
 export const login = async (req: express.Request, res: express.Response) => {
     try {
         const { email, password } = req.body;
@@ -37,6 +69,31 @@ export const login = async (req: express.Request, res: express.Response) => {
     }
 };
 
+/**
+ * @swagger
+ * /register:
+ *   post:
+ *     summary: User registration
+ *     tags: [Authentication]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *               name:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Successful registration
+ *       400:
+ *         description: Invalid request body or existing user
+ */
 export const register = async (req: express.Request, res: express.Response) => {
     try {
         const { email, password, name } = req.body;
