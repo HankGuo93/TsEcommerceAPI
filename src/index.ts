@@ -38,10 +38,25 @@ server.listen(8080, () => {
     console.log('Server running on http://localhost:8080/');
 })
 
-const MONGO_URL = 'mongodb://localhost:27017/?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000'
+const MONGO_URL = 'mongodb://db:27017/?retryWrites=true&serverSelectionTimeoutMS=5000&connectTimeoutMS=10000'
 
 mongoose.Promise = Promise;
-mongoose.connect(MONGO_URL);
-mongoose.connection.on('error', (error: Error) => console.log(error));
+const connectWithRetry = () => {
+  mongoose.connect(MONGO_URL)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch((error: Error) => {
+      console.log('Failed to connect to MongoDB:', error);
+      console.log('Retrying connection in 5 seconds...');
+      setTimeout(connectWithRetry, 5000);
+    });
+};
+
+mongoose.connection.on('disconnected', () => {
+  console.log('MongoDB disconnected');
+  console.log('Retrying connection in 5 seconds...');
+  setTimeout(connectWithRetry, 5000);
+});
+
+connectWithRetry();
 
 app.use('/', router());
