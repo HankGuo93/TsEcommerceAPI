@@ -12,7 +12,7 @@ import { authentication, random } from "../helpers";
 
 /**
  * @swagger
- * /login:
+ * /auth/login:
  *   post:
  *     summary: User login
  *     tags: [Authentication]
@@ -79,7 +79,7 @@ export const login = async (req: express.Request, res: express.Response) => {
 
 /**
  * @swagger
- * /register:
+ * /auth/register:
  *   post:
  *     summary: User registration
  *     tags: [Authentication]
